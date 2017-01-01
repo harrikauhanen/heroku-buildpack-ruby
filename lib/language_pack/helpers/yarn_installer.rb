@@ -24,13 +24,13 @@ class LanguagePack::YarnInstaller
   def install
     install_node
     @fetcher.fetch_untar(version, "dist/bin/")
-    FileUtils.cp_r("dist/bin/*", ".")
+    FileUtils.cp_r("dist/bin/", ".")
     FileUtils.rm_rf("dist")
   end
 
   def install_node
     @node_fetcher.fetch_untar("", "node-v6.9.1-linux-x64/bin")
-    FileUtils.cp_r("node-v6.9.1-linux-x64/bin/*", ".")
+    FileUtils.cp_r("node-v6.9.1-linux-x64/bin/", ".")
     FileUtils.rm_rf("node-v6.9.1-linux-x64")
   end
 
