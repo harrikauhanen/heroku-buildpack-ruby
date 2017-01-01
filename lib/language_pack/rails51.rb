@@ -29,7 +29,6 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
       allow_git do
         # puts "installing yarn"
         FileUtils.chdir "./vendor" do
-          puts @node_installer.install
           puts @yarn_installer.install
           puts "*************"
           puts `ls`
