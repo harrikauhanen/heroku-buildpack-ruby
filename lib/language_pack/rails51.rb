@@ -31,7 +31,11 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
         FileUtils.chdir "./vendor" do
           puts @node_installer.install
           puts @yarn_installer.install
-          puts FileUtils.ls
+          puts "*************"
+          puts `ls`
+          puts "*************"
+          puts `pwd`
+          puts "*************"
           install_node_packages
         end
         run_webpack_compile_rake_task
