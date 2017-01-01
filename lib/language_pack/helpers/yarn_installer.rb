@@ -24,7 +24,7 @@ class LanguagePack::YarnInstaller
   def install
     install_node
     @fetcher.fetch_untar(version, "dist/bin/")
-    FileUtils.cp_r("dist/bin/", ".")
+    FileUtils.cp_r("dist/bin/*", ".")
     FileUtils.rm_rf("dist")
   end
 
