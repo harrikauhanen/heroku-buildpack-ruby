@@ -29,7 +29,7 @@ class LanguagePack::YarnInstaller
   end
 
   def install_node
-    @node_fetcher.install("", "node-v6.9.1-linux-x64/bin")
+    @node_fetcher.fetch_untar("", "node-v6.9.1-linux-x64/bin")
     FileUtils.cp_r("node-v6.9.1-linux-x64/bin/*", ".")
     FileUtils.rm_rf("node-v6.9.1-linux-x64")
   end
