@@ -45,7 +45,7 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
   def install_node_packages
     puts "installing node packages"
     puts "PWD : #{`pwd`}"
-    puts `./bin/yarn install`
+    puts `./yarnpkg install`
     puts "installing node packages done"
   end
 
