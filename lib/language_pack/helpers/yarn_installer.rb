@@ -4,7 +4,7 @@ class LanguagePack::YarnInstaller
 
   def initialize(build_path, cache_path)
     @fetcher = LanguagePack::Fetcher.new(YARN_SOURCE_URL)
-    @node_fetcher = LanguagePack::Fetcher.new("https://nodejs.org/dist/v6.9.1/node-v6.9.1-linux-x64.tar.gz")
+    @node_fetcher = LanguagePack::Fetcher.new("https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.gz")
     @build_path = build_path
     puts "build path = #{@build_path}"
   end
@@ -29,9 +29,9 @@ class LanguagePack::YarnInstaller
   end
 
   def install_node
-    @node_fetcher.fetch_untar("", "node-v6.9.1-linux-x64/bin")
-    FileUtils.cp("node-v6.9.1-linux-x64/bin/node", ".")
-    FileUtils.rm_rf("node-v6.9.1-linux-x64")
+    @node_fetcher.fetch_untar("", "node-v7.3.0-linux-x64/bin")
+    FileUtils.cp("node-v7.3.0-linux-x64/bin/", ".")
+    FileUtils.rm_rf("node-v7.3.0-linux-x64")
   end
 
 end
