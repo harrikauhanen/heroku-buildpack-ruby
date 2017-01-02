@@ -28,10 +28,15 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
       super
       allow_git do
         # puts "installing yarn"
-        # puts @node_installer.install
-        # puts @yarn_installer.install
-        # puts "installing yarn done"
-        install_node_packages
+        FileUtils.chdir "./vendor" do
+          puts @yarn_installer.install
+          puts "*************"
+          puts `ls`
+          puts "*************"
+          puts `pwd`
+          puts "*************"
+          install_node_packages
+        end
         run_webpack_compile_rake_task
       end
     end
@@ -40,7 +45,7 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
   def install_node_packages
     puts "installing node packages"
     puts "PWD : #{`pwd`}"
-    puts `./bin/yarn install`
+    puts `../bin/yarn install`
     puts "installing node packages done"
   end
 
