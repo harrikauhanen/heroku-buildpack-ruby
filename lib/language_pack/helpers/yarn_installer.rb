@@ -30,7 +30,8 @@ class LanguagePack::YarnInstaller
 
   def install_node
     @node_fetcher.fetch_untar("", "node-v7.3.0-linux-x64/bin")
-    FileUtils.cp_r("node-v7.3.0-linux-x64/bin/.", ".")
+    FileUtils.mkdir("./node")
+    FileUtils.cp_r("node-v7.3.0-linux-x64/.", "./node")
     FileUtils.rm_rf("node-v7.3.0-linux-x64")
   end
 
