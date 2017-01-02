@@ -7,5 +7,5 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 export PATH="$BUILD_DIR/vendor":$PATH
-echo pwd
+pwd
 ruby compile.rb $BUILD_DIR $CACHE_DIR
