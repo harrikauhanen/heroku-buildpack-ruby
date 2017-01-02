@@ -8,4 +8,5 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 export PATH="$BUILD_DIR/vendor":$PATH
 pwd
+ls
 ruby compile.rb $BUILD_DIR $CACHE_DIR
