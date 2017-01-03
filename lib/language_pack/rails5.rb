@@ -16,7 +16,7 @@ class LanguagePack::Rails5 < LanguagePack::Rails42
 
   def initialize(build_path, cache_path=nil)
     super(build_path, cache_path)
-    @yarn_wrapper    = LanguagePack::YarnWrapper.new
+    @yarn_wrapper    = LanguagePack::Helpers::YarnWrapper.new
   end
 
   def compile
