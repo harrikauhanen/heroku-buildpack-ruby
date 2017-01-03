@@ -36,7 +36,7 @@ class LanguagePack::Helpers::YarnWrapper
 
   def node_app?
     FileUtils.chdir @vendor_path do
-      yarn_lock_file_path
+      return yarn_lock_file_path
     end
   end
 
