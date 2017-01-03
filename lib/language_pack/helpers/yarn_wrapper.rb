@@ -59,7 +59,7 @@ class LanguagePack::Helpers::YarnWrapper
     instrument "node.download" do
       untared_folder = "node-v#{node_version}-linux-x64"
       topic "installing #{untared_folder}"
-      @yarn_fetcher.fetch_untar("v#{node_version}/#{untared_folder}.tar.gz", "#{untared_folder}/bin")
+      @node_fetcher.fetch_untar("v#{node_version}/#{untared_folder}.tar.gz", "#{untared_folder}/bin")
       FileUtils.mkdir("./node")
       FileUtils.cp_r("#{untared_folder}/.", "./node")
       FileUtils.rm_rf(untared_folder)
