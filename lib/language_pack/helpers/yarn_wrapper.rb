@@ -31,11 +31,11 @@ class LanguagePack::Helpers::YarnWrapper
     end
   end
 
-  private
-
   def node_app?
     yarn_lock_file_path
   end
+
+  private
 
   def install_yarn
     instrument "yarn.download" do
