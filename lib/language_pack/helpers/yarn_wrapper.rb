@@ -1,4 +1,5 @@
 require 'json'
+require 'open-uri'
 
 class LanguagePack::Helpers::YarnWrapper
   include LanguagePack::ShellHelpers
