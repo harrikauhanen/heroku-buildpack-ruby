@@ -23,55 +23,44 @@ class LanguagePack::Helpers::YarnWrapper
   end
 
   def install_node_modules_and_dependencies
-    topic "Testing for yarn config"
     FileUtils.chdir @vendor_path do
-      topic `pwd`
-      topic `ls`
       if node_app?
-        topic "yarn config detected"
-        instrument "webpacker.setup" do
-          install_node
-          install_yarn
-          install_packages
-        end
+        topic "yarn.lock file detected"
+        install_node
+        install_yarn
+        install_packages
       end
     end
   end
 
   def node_app?
     FileUtils.chdir @vendor_path do
-      return yarn_lock_file_path
+      return yarn_lock_file_path && yarn_lock_file_path
     end
   end
 
   private
 
   def install_yarn
-    instrument "yarn.download" do
-      topic "installing yarn #{yarn_version}"
-      @yarn_fetcher.fetch_untar("#{yarn_version}/yarn-v#{yarn_version}.tar.gz", "dist/")
-      FileUtils.cp_r("dist/.", "./yarn")
-      FileUtils.rm_rf("dist")
-    end
+    topic "installing yarn #{yarn_version}"
+    @yarn_fetcher.fetch_untar("#{yarn_version}/yarn-v#{yarn_version}.tar.gz", "dist/")
+    FileUtils.cp_r("dist/.", "./yarn")
+    FileUtils.rm_rf("dist")
   end
 
   def install_node
-    instrument "node.download" do
-      untared_folder = "node-v#{node_version}-linux-x64"
-      topic "installing #{untared_folder}"
-      @node_fetcher.fetch_untar("v#{node_version}/#{untared_folder}.tar.gz", "#{untared_folder}/bin")
-      FileUtils.mkdir("./node")
-      FileUtils.cp_r("#{untared_folder}/.", "./node")
-      FileUtils.rm_rf(untared_folder)
-    end
+    untar_dir = "node-v#{node_version}-linux-x64"
+    topic "installing #{untar_dir}"
+    @node_fetcher.fetch_untar("v#{node_version}/#{untar_dir}.tar.gz", "#{untar_dir}/bin")
+    FileUtils.mkdir("./node")
+    FileUtils.cp_r("#{untar_dir}/.", "./node")
+    FileUtils.rm_rf(untar_dir)
   end
 
   def install_packages
-    instrument "yarn.install" do
-      topic "installing node modules"
-      run! "../bin/yarn install"
-      topic "installing node packages done"
-    end
+    topic "installing node modules"
+    run! "../bin/yarn install"
+    topic "installing node packages done"
   end
 
   def yarn_version
@@ -82,15 +71,15 @@ class LanguagePack::Helpers::YarnWrapper
     @node_version ||= open("https://semver.herokuapp.com/node/resolve/#{provided_node_version}")
   end
 
-  def package_dot_json_content
-    return @package_dot_json_content if @package_dot_json_content
-    return {} unless package_dot_json_file_path
-    json = File.read(package_dot_json_file_path)
-    @package_dot_json_content = JSON.parse(json)
+  def parsed_package_file
+    @parsed_package_file ||= begin
+      json = File.read(package_dot_json_file_path)
+      JSON.parse(json)
+    end
   end
 
   def engine_config
-    @engine_config ||= package_dot_json_content.fetch('engines', {})
+    @engine_config ||= parsed_package_file.fetch('engines', {})
   end
 
   def provided_node_version
