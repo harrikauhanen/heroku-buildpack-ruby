@@ -69,7 +69,7 @@ class LanguagePack::Helpers::YarnWrapper
   def install_packages
     instrument "yarn.install" do
       topic "installing node modules"
-      exec "../bin/yarn install"
+      run! "../bin/yarn install"
       topic "installing node packages done"
     end
   end

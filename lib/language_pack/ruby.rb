@@ -40,7 +40,6 @@ class LanguagePack::Ruby < LanguagePack::Base
     super(build_path, cache_path)
     @fetchers[:mri]    = LanguagePack::Fetcher.new(VENDOR_URL, @stack)
     @fetchers[:rbx]    = LanguagePack::Fetcher.new(RBX_BASE_URL, @stack)
-    @yarn_installer    = LanguagePack::Fetcher.new(YARN_URL, @stack)
     @node_installer    = LanguagePack::NodeInstaller.new(@stack)
     @jvm_installer     = LanguagePack::JvmInstaller.new(slug_vendor_jvm, @stack)
   end
