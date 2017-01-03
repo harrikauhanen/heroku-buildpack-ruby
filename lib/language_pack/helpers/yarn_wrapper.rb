@@ -1,5 +1,6 @@
 require 'json'
 require 'open-uri'
+require 'uri'
 
 class LanguagePack::Helpers::YarnWrapper
   include LanguagePack::ShellHelpers
@@ -111,6 +112,10 @@ class LanguagePack::Helpers::YarnWrapper
   def instrument title
     topic title
     yield
+  end
+
+  def open uri
+    super(URI.escape(uri))
   end
 
 end
