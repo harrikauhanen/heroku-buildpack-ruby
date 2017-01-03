@@ -18,8 +18,10 @@ class LanguagePack::Helpers::YarnWrapper
   end
 
   def install_node_modules_and_dependencies
-    puts "Testing for yarn config"
+    topic "Testing for yarn config"
     FileUtils.chdir @vendor_dir_path do
+      topic `pwd`
+      topic `ls`
       if node_app?
         topic "yarn config detected"
         instrument "webpacker.setup" do
