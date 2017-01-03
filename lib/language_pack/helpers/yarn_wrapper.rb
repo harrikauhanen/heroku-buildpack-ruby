@@ -115,7 +115,7 @@ class LanguagePack::Helpers::YarnWrapper
   end
 
   def open uri
-    super(URI.escape(uri)).to_s
+    super(URI.escape(uri)).read
   end
 
 end
