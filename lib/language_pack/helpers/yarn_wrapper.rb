@@ -75,7 +75,7 @@ class LanguagePack::Helpers::YarnWrapper
   end
 
   def yarn_version
-    @yarn_version ||= open("https://semver.herokuapp.com/yarn/resolve/#{provided_node_version}")
+    @yarn_version ||= open("https://semver.herokuapp.com/yarn/resolve/#{provided_yarn_version}")
   end
 
   def node_version
