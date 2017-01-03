@@ -1,6 +1,7 @@
 require 'securerandom'
 require "language_pack"
 require "language_pack/rails42"
+require "language_pack/helpers/yarn_wrapper"
 
 class LanguagePack::Rails5 < LanguagePack::Rails42
   # @return [Boolean] true if it's a Rails 5.x app
