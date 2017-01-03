@@ -105,4 +105,9 @@ class LanguagePack::Helpers::YarnWrapper
     Dir["package.json"].first
   end
 
+  def instrument title
+    topic title
+    yield
+  end
+
 end

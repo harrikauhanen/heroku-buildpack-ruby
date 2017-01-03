@@ -22,10 +22,10 @@ class LanguagePack::Rails5 < LanguagePack::Rails42
 
   def compile
     instrument "rails5.compile" do
+      @yarn_wrapper.install_node_modules_and_dependencies
       super
       allow_git do
         topic "rails5 compilie"
-        @yarn_wrapper.install_node_modules_and_dependencies
         run_webpack_compile_rake_task
       end
     end
