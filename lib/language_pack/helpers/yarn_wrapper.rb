@@ -81,7 +81,7 @@ class LanguagePack::Helpers::YarnWrapper
   def package_dot_json_content
     return @package_dot_json_content if @package_dot_json_content
     return {} unless package_dot_json_file_path
-    json = File.read('file-name-to-be-read.json')
+    json = File.read(package_dot_json_file_path)
     @package_dot_json_content = JSON.parse(json)
   end
 
