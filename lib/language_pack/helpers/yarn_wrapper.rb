@@ -13,13 +13,14 @@ class LanguagePack::Helpers::YarnWrapper
 
   def initialize
     @vendor_dir_path =  ENV['VENDOR_DIR_PATH'] || VENDOR_DIR_PATH
+    @vendor_path = Pathname.new(@vendor_dir_path).realpath
     @yarn_fetcher = LanguagePack::Fetcher.new("https://yarnpkg.com/downloads/")
     @node_fetcher = LanguagePack::Fetcher.new("https://nodejs.org/dist/")
   end
 
   def install_node_modules_and_dependencies
     topic "Testing for yarn config"
-    FileUtils.chdir @vendor_dir_path do
+    FileUtils.chdir @vendor_path do
       topic `pwd`
       topic `ls`
       if node_app?
@@ -34,7 +35,9 @@ class LanguagePack::Helpers::YarnWrapper
   end
 
   def node_app?
-    yarn_lock_file_path
+    FileUtils.chdir @vendor_path do
+      yarn_lock_file_path
+    end
   end
 
   private
