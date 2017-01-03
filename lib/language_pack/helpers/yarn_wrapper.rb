@@ -1,3 +1,5 @@
+require 'json'
+
 class LanguagePack::Helpers::YarnWrapper
   include LanguagePack::ShellHelpers
 
