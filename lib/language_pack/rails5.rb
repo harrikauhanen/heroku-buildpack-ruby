@@ -26,7 +26,8 @@ class LanguagePack::Rails5 < LanguagePack::Rails42
       allow_git do
         # installs node, yarn, node modules if package.json and yarn.lock present.
         @yarn_wrapper.install_node_modules_and_dependencies
-        run_webpack_compile_rake_task
+        run_webpack_compile_rake_task   # This needs to be compiled first
+        run_assets_precompile_rake_task 
       end
     end
   end
@@ -48,6 +49,25 @@ class LanguagePack::Rails5 < LanguagePack::Rails42
     # do not install plugins, do not call super, do not warn
   end
 
+  def run_assets_precompile_rake_task
+    instrument 'ruby.run_assets_precompile_rake_task' do
+
+      compile = rake.task("assets:precompile")
+      return true unless compile.is_defined?
+
+      topic "precompiling assets"
+      compile.invoke(env: rake_env)
+      if compile.success?
+        puts "Assets precompilation compile completed (#{"%.2f" % compile.time}s)"
+      else
+        log "assets_precompile", :status => "failure"
+        msg = "assets precompilation compile failed.\n"
+        error(msg)
+      end
+    end
+  end
+
+  
   def run_webpack_compile_rake_task
     instrument 'ruby.run_webpack_compile_rake_task' do
 
@@ -57,7 +77,7 @@ class LanguagePack::Rails5 < LanguagePack::Rails42
       topic "compiling webpacks"
       compile.invoke(env: rake_env)
       if compile.success?
-        puts "Wepacker compile completed (#{"%.2f" % compile.time}s)"
+        puts "Webpacker compile completed (#{"%.2f" % compile.time}s)"
       else
         log "webpacker_compile", :status => "failure"
         msg = "webpacker compile failed.\n"
