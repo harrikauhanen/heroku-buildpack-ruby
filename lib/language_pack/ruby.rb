@@ -103,7 +103,7 @@ WARNING
         post_bundler
         create_database_yml
         install_binaries
-        run_assets_precompile_rake_task
+        # run_assets_precompile_rake_task # Oh nos, this has nothing to do with Ruby
       end
       best_practice_warnings
       super
